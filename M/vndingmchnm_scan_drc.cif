@@ -1,0 +1,12 @@
+(rds to CIF driver cvs version $Revision: 1.1 $
+technology /etc/alliance/cmos.rds
+Fri May 20 09:39:45 2016
+vndingmchnm_scan_drc
+root);
+
+DS1 50 2;
+9 vndingmchnm_scan_drc;
+DF;
+
+C1;
+E 

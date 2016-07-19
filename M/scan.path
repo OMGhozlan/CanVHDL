@@ -1,0 +1,19 @@
+BEGIN_PATH_REG
+
+vndingmchn_currstt_0_ins
+vndingmchn_currstt_1_ins
+vndingmchn_currstt_2_ins
+
+END_PATH_REG
+
+
+
+
+BEGIN_CONNECTOR
+
+SCAN_IN      scanin
+SCAN_OUT     scanout
+SCAN_TEST    test
+
+END_CONNECTOR
+
