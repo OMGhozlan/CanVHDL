@@ -1,0 +1,95 @@
+-- VHDL data flow description generated from `vndingmchna_fb`
+--		date : Fri May 20 09:39:34 2016
+
+
+-- Entity Declaration
+
+ENTITY vndingmchna_fb IS
+  PORT (
+  vss : in BIT;	-- vss
+  vdd : in BIT;	-- vdd
+  change : out BIT;	-- change
+  can : out BIT;	-- can
+  halfin : in BIT;	-- halfin
+  onein : in BIT;	-- onein
+  res : in BIT;	-- res
+  clk : in BIT	-- clk
+  );
+END vndingmchna_fb;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF vndingmchna_fb IS
+  SIGNAL vndingmchn_currstt : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- vndingmchn_currstt
+  SIGNAL not_aux2 : BIT;		-- not_aux2
+  SIGNAL no2_x1_sig : BIT;		-- no2_x1_sig
+  SIGNAL not_aux0 : BIT;		-- not_aux0
+  SIGNAL not_aux1 : BIT;		-- not_aux1
+  SIGNAL not_vndingmchn_currstt : BIT_VECTOR(2 DOWNTO 0);	-- not_vndingmchn_currstt
+  SIGNAL not_res : BIT;		-- not_res
+  SIGNAL not_halfin : BIT;		-- not_halfin
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL na3_x1_sig : BIT;		-- na3_x1_sig
+  SIGNAL inv_x2_sig : BIT;		-- inv_x2_sig
+  SIGNAL no3_x1_sig : BIT;		-- no3_x1_sig
+  SIGNAL na2_x1_sig : BIT;		-- na2_x1_sig
+  SIGNAL no3_x1_2_sig : BIT;		-- no3_x1_2_sig
+  SIGNAL an12_x1_sig : BIT;		-- an12_x1_sig
+  SIGNAL no2_x1_2_sig : BIT;		-- no2_x1_2_sig
+  SIGNAL o4_x2_sig : BIT;		-- o4_x2_sig
+  SIGNAL oa22_x2_sig : BIT;		-- oa22_x2_sig
+  SIGNAL o3_x2_sig : BIT;		-- o3_x2_sig
+  SIGNAL inv_x2_2_sig : BIT;		-- inv_x2_2_sig
+  SIGNAL na4_x1_sig : BIT;		-- na4_x1_sig
+  SIGNAL na2_x1_2_sig : BIT;		-- na2_x1_2_sig
+  SIGNAL mbk_buf_vndingmchn_currstt : BIT_VECTOR(2 DOWNTO 2);	-- mbk_buf_vndingmchn_currstt
+
+BEGIN
+  mbk_buf_vndingmchn_currstt (2) <= vndingmchn_currstt(2);
+  na2_x1_2_sig <= NOT((na4_x1_sig AND o3_x2_sig));
+  na4_x1_sig <= NOT((((not_aux2 AND halfin) AND inv_x2_2_sig) AND
+ not_res));
+  inv_x2_2_sig <= NOT(onein);
+  o3_x2_sig <= ((not_aux0 OR res) OR not_aux2);
+  oa22_x2_sig <= ((not_aux0 AND aux3) OR o4_x2_sig);
+  o4_x2_sig <= (((res OR an12_x1_sig) OR no2_x1_2_sig) OR 
+no3_x1_2_sig);
+  no2_x1_2_sig <= NOT((not_aux1 OR not_vndingmchn_currstt(0)));
+  an12_x1_sig <= (NOT(not_aux1) AND vndingmchn_currstt(1));
+  no3_x1_2_sig <= NOT(((vndingmchn_currstt(1) OR 
+not_vndingmchn_currstt(2)) OR na2_x1_sig));
+  na2_x1_sig <= NOT((onein AND not_halfin));
+  no3_x1_sig <= NOT(((inv_x2_sig OR vndingmchn_currstt(0)) OR 
+na3_x1_sig));
+  inv_x2_sig <= NOT(aux3);
+  na3_x1_sig <= NOT(((onein AND not_res) AND not_halfin));
+  aux3 <= NOT((mbk_buf_vndingmchn_currstt(2) OR 
+vndingmchn_currstt(1)));
+  not_halfin <= NOT(halfin);
+  not_res <= NOT(res);
+  not_vndingmchn_currstt (0) <= NOT(vndingmchn_currstt(0));
+  not_vndingmchn_currstt (2) <= NOT(vndingmchn_currstt(2));
+  not_aux1 <= (onein XOR halfin);
+  not_aux0 <= (no2_x1_sig AND not_vndingmchn_currstt(0));
+  no2_x1_sig <= NOT((onein OR not_halfin));
+  not_aux2 <= (vndingmchn_currstt(1) OR 
+not_vndingmchn_currstt(2));
+  label0 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (0) <= GUARDED no3_x1_sig;
+  END BLOCK label0;
+  label1 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (1) <= GUARDED oa22_x2_sig;
+  END BLOCK label1;
+  label2 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (2) <= GUARDED na2_x1_2_sig;
+  END BLOCK label2;
+
+change <= vndingmchn_currstt(0);
+
+can <= ((vndingmchn_currstt(1) AND 
+mbk_buf_vndingmchn_currstt(2)) OR vndingmchn_currstt(0));
+END;

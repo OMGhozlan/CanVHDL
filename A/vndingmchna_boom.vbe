@@ -1,0 +1,60 @@
+-- VHDL data flow description generated from `vndingmchna_boom`
+--		date : Fri May 20 09:39:33 2016
+
+
+-- Entity Declaration
+
+ENTITY vndingmchna_boom IS
+  PORT (
+  clk : in BIT;	-- clk
+  res : in BIT;	-- res
+  onein : in BIT;	-- onein
+  halfin : in BIT;	-- halfin
+  can : out BIT;	-- can
+  change : out BIT;	-- change
+  vdd : in BIT;	-- vdd
+  vss : in BIT	-- vss
+  );
+END vndingmchna_boom;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF vndingmchna_boom IS
+  SIGNAL vndingmchn_currstt : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- vndingmchn_currstt
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+
+BEGIN
+  aux3 <= (NOT(vndingmchn_currstt(1)) AND NOT(
+vndingmchn_currstt(2)));
+  aux2 <= NOT(vndingmchn_currstt(1) OR NOT(
+vndingmchn_currstt(2)));
+  aux1 <= NOT(onein XOR halfin);
+  aux0 <= NOT(NOT(vndingmchn_currstt(0)) AND NOT(onein) AND
+ halfin);
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    vndingmchn_currstt (0) <= GUARDED (NOT(vndingmchn_currstt(0)) AND NOT(res) AND 
+onein AND NOT(halfin) AND aux3);
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    vndingmchn_currstt (1) <= GUARDED ((aux1 AND vndingmchn_currstt(1)) OR (
+vndingmchn_currstt(0) AND aux1) OR res OR (onein AND NOT(halfin) AND 
+NOT(vndingmchn_currstt(1)) AND vndingmchn_currstt(2)
+) OR (NOT(aux0) AND aux3));
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    vndingmchn_currstt (2) <= GUARDED ((aux0 AND NOT(res) AND aux2) OR (NOT(res) AND 
+NOT(onein) AND halfin AND NOT(aux2)));
+  END BLOCK label2;
+
+change <= vndingmchn_currstt(0);
+
+can <= (vndingmchn_currstt(0) OR (vndingmchn_currstt(1) 
+AND vndingmchn_currstt(2)));
+END;

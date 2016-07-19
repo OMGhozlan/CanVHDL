@@ -1,0 +1,84 @@
+-- VHDL data flow description generated from `vndingmchna`
+--		date : Fri May 20 09:39:33 2016
+
+
+-- Entity Declaration
+
+ENTITY vndingmchna IS
+  PORT (
+  clk : in BIT;	-- clk
+  res : in BIT;	-- res
+  onein : in BIT;	-- onein
+  halfin : in BIT;	-- halfin
+  can : out BIT;	-- can
+  change : out BIT;	-- change
+  vdd : in BIT;	-- vdd
+  vss : in BIT	-- vss
+  );
+END vndingmchna;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE VBE OF vndingmchna IS
+  SIGNAL vndingmchn_currstt : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- vndingmchn_currstt
+  SIGNAL vndingmchn_currstt_s4 : BIT;		-- vndingmchn_currstt_s4
+  SIGNAL vndingmchn_nxtstt_s4 : BIT;		-- vndingmchn_nxtstt_s4
+  SIGNAL vndingmchn_currstt_s3 : BIT;		-- vndingmchn_currstt_s3
+  SIGNAL vndingmchn_nxtstt_s3 : BIT;		-- vndingmchn_nxtstt_s3
+  SIGNAL vndingmchn_currstt_s2 : BIT;		-- vndingmchn_currstt_s2
+  SIGNAL vndingmchn_nxtstt_s2 : BIT;		-- vndingmchn_nxtstt_s2
+  SIGNAL vndingmchn_currstt_s1 : BIT;		-- vndingmchn_currstt_s1
+  SIGNAL vndingmchn_nxtstt_s1 : BIT;		-- vndingmchn_nxtstt_s1
+  SIGNAL vndingmchn_currstt_s0 : BIT;		-- vndingmchn_currstt_s0
+  SIGNAL vndingmchn_nxtstt_s0 : BIT;		-- vndingmchn_nxtstt_s0
+  SIGNAL vndingmchn_nxtstt : BIT_VECTOR(2 DOWNTO 0);	-- vndingmchn_nxtstt
+
+BEGIN
+  vndingmchn_nxtstt(0) <= vndingmchn_nxtstt_s4;
+  vndingmchn_nxtstt(1) <= (vndingmchn_nxtstt_s0 OR vndingmchn_nxtstt_s3);
+  vndingmchn_nxtstt(2) <= (vndingmchn_nxtstt_s1 OR vndingmchn_nxtstt_s3);
+  vndingmchn_nxtstt_s0 <= ((vndingmchn_currstt_s0 AND NOT(onein XOR halfin)
+) OR (vndingmchn_currstt_s3 AND NOT(onein XOR 
+halfin)) OR (vndingmchn_currstt_s4 AND NOT(onein XOR 
+halfin)));
+  vndingmchn_currstt_s0 <= (NOT(vndingmchn_currstt(2)) AND 
+vndingmchn_currstt(1));
+  vndingmchn_nxtstt_s1 <= ((vndingmchn_currstt_s0 AND halfin AND NOT(onein)
+) OR (vndingmchn_currstt_s1 AND NOT(onein XOR 
+halfin)) OR (vndingmchn_currstt_s3 AND halfin AND NOT(
+onein)) OR (vndingmchn_currstt_s4 AND halfin AND NOT(
+onein)));
+  vndingmchn_currstt_s1 <= (vndingmchn_currstt(2) AND NOT(
+vndingmchn_currstt(1)));
+  vndingmchn_nxtstt_s2 <= ((vndingmchn_currstt_s0 AND NOT(halfin) AND onein
+) OR (vndingmchn_currstt_s1 AND halfin AND NOT(
+onein)) OR (vndingmchn_currstt_s2 AND NOT(onein XOR 
+halfin)) OR (vndingmchn_currstt_s3 AND NOT(halfin) AND 
+onein) OR (vndingmchn_currstt_s4 AND NOT(halfin) AND 
+onein));
+  vndingmchn_currstt_s2 <= (NOT(vndingmchn_currstt(2)) AND NOT(
+vndingmchn_currstt(1)) AND NOT(vndingmchn_currstt(0)));
+  vndingmchn_nxtstt_s3 <= ((vndingmchn_currstt_s1 AND NOT(halfin) AND onein
+) OR (vndingmchn_currstt_s2 AND halfin AND NOT(
+onein)));
+  vndingmchn_currstt_s3 <= (vndingmchn_currstt(2) AND vndingmchn_currstt(1));
+  vndingmchn_nxtstt_s4 <= (vndingmchn_currstt_s2 AND NOT(halfin) AND onein);
+  vndingmchn_currstt_s4 <= vndingmchn_currstt(0);
+  label0 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    vndingmchn_currstt(0) <= GUARDED (vndingmchn_nxtstt(0) AND NOT(res));
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    vndingmchn_currstt(1) <= GUARDED (vndingmchn_nxtstt(1) OR res);
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    vndingmchn_currstt(2) <= GUARDED (vndingmchn_nxtstt(2) AND NOT(res));
+  END BLOCK label2;
+
+change <= vndingmchn_currstt_s4;
+
+can <= (vndingmchn_currstt_s3 OR vndingmchn_currstt_s4);
+END;
