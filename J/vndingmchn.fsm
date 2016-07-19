@@ -1,0 +1,138 @@
+  Entity vndingmchn is
+
+     port(
+        clk    : in bit ;
+        res :in bit;
+        onein  :in bit;
+        halfin     :in bit;
+        can :out bit;
+        change :out bit;
+        vdd   :in bit;
+        vss   :in bit
+     );
+     End vndingmchn;
+
+     architecture func of vndingmchn is
+
+     type STT_TYPE is (S0,S1,S2,S3,S4);
+
+	--pragma CURRENT_STATE currStt
+	--pragma NEXT_STATE    nxtStt
+	--pragma CLOCK         clk
+
+     signal nxtStt, currStt : STT_TYPE;
+
+
+     begin
+        process (currStt,onein,halfin,res)
+        begin
+            if(res='1') then
+            nxtStt <= S0 ;
+            else
+                case currStt is
+                    when S0 =>
+                        if (onein = '0' AND halfin = '0') then
+                            nxtStt <= S0;
+                          elsif (onein = '0' AND halfin = '1') then
+                              nxtStt <= S1;
+                          elsif (onein = '1' AND halfin = '0') then
+                              nxtStt <= S2;
+                            else
+                              nxtStt <= S0; 
+                            end if; 
+                        
+                    when S1 =>
+                        if (onein = '0' AND halfin = '0') then
+                            nxtStt <= S1;
+                          elsif (onein = '0' AND halfin = '1') then
+                              nxtStt <= S2;
+                          elsif (onein = '1' AND halfin = '0') then
+                              nxtStt <= S3;
+                            else
+                              nxtStt <= S1; 
+                            end if;
+ 
+                    when S2 =>
+                        if (onein = '0' AND halfin = '0') then
+                            nxtStt <= S2;
+                          elsif (onein = '0' AND halfin = '1') then
+                              nxtStt <= S3;
+                          elsif (onein = '1' AND halfin = '0') then
+                              nxtStt <= S4;
+                            else
+                              nxtStt <= S2; 
+                            end if;
+
+                    when S3 =>
+                        if (onein = '0' AND halfin = '0') then
+			    --can <= '1';
+			    --change <= '0';
+			    --res <= '1';
+                            nxtStt <= S0;
+                          elsif (onein = '0' AND halfin = '1') then
+			    --can <= '1';
+			    --change <= '0';
+                            nxtStt <= S1;
+                          elsif (onein = '1' AND halfin = '0') then
+			      --can <= '1';
+			      --change <= '0';
+                              nxtStt <= S2;
+                            else
+                              nxtStt <= S0; 
+                            end if;
+
+                    when S4 =>
+                        if (onein = '0' AND halfin = '0') then
+			    --can <= '1';
+			    --change <= '1';
+			    --res <= '1';
+                            nxtStt <= S0;
+                          elsif (onein = '0' AND halfin = '1') then
+			    can <= '1';
+			    change <= '1';
+                            nxtStt <= S1;
+                          elsif (onein = '1' AND halfin = '0') then
+			      --can <= '1';
+			      --change <= '1';
+                              nxtStt <= S2; --res <= '1', nxtStt <=S3
+                            else
+                              nxtStt <= S0; 
+                            end if;
+
+                    when OTHERS =>
+                            assert ('1')
+                            report "Illegal State";
+		
+            end case;
+       end if ;
+       case currStt is
+	   when S0 =>
+	   can <= '0';
+	   change <= '0';
+	   when S1 =>
+	   can <= '0';
+	   change <= '0';
+	   when S2 =>
+	   can <= '0';
+	   change <= '0';
+	   when S3 =>
+	   can <= '1';
+	   change <= '0';
+	   when S4 =>
+	   can <= '1';
+	   change <= '1';
+	end case;
+end process;
+
+process(clk)
+       begin
+         if(clk = '1' and not clk' stable) then
+           currStt <= nxtStt ;
+         end if;
+ end process;
+ 
+ 
+
+
+end func ;
+

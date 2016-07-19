@@ -1,0 +1,5 @@
+east  ( vssePad halfinPad oneinPad ) 
+west  ( canPad vssickPad changePad ) 
+north ( resPad vddiPad clkPad ) 
+south ( scaninPad vddePad testPad scanoutPad)
+width ( vss 100 vdd 100 )
