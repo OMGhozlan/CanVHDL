@@ -1,0 +1,123 @@
+-- VHDL data flow description generated from `vndingmchno_fb`
+--		date : Fri May 20 09:39:50 2016
+
+
+-- Entity Declaration
+
+ENTITY vndingmchno_fb IS
+  PORT (
+  vss : in BIT;	-- vss
+  vdd : in BIT;	-- vdd
+  change : out BIT;	-- change
+  can : out BIT;	-- can
+  halfin : in BIT;	-- halfin
+  onein : in BIT;	-- onein
+  res : in BIT;	-- res
+  clk : in BIT	-- clk
+  );
+END vndingmchno_fb;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF vndingmchno_fb IS
+  SIGNAL vndingmchn_currstt : REG_VECTOR(4 DOWNTO 0) REGISTER;	-- vndingmchn_currstt
+  SIGNAL not_aux1 : BIT;		-- not_aux1
+  SIGNAL not_aux0 : BIT;		-- not_aux0
+  SIGNAL not_vndingmchn_currstt : BIT_VECTOR(4 DOWNTO 0);	-- not_vndingmchn_currstt
+  SIGNAL not_aux2 : BIT;		-- not_aux2
+  SIGNAL not_onein : BIT;		-- not_onein
+  SIGNAL not_halfin : BIT;		-- not_halfin
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL na2_x1_sig : BIT;		-- na2_x1_sig
+  SIGNAL no2_x1_sig : BIT;		-- no2_x1_sig
+  SIGNAL no2_x1_2_sig : BIT;		-- no2_x1_2_sig
+  SIGNAL an12_x1_sig : BIT;		-- an12_x1_sig
+  SIGNAL oa2a22_x2_sig : BIT;		-- oa2a22_x2_sig
+  SIGNAL na4_x1_sig : BIT;		-- na4_x1_sig
+  SIGNAL na2_x1_3_sig : BIT;		-- na2_x1_3_sig
+  SIGNAL na3_x1_sig : BIT;		-- na3_x1_sig
+  SIGNAL na2_x1_4_sig : BIT;		-- na2_x1_4_sig
+  SIGNAL na2_x1_5_sig : BIT;		-- na2_x1_5_sig
+  SIGNAL na3_x1_2_sig : BIT;		-- na3_x1_2_sig
+  SIGNAL na2_x1_2_sig : BIT;		-- na2_x1_2_sig
+  SIGNAL na2_x1_6_sig : BIT;		-- na2_x1_6_sig
+  SIGNAL na2_x1_7_sig : BIT;		-- na2_x1_7_sig
+  SIGNAL on12_x1_sig : BIT;		-- on12_x1_sig
+  SIGNAL a3_x2_sig : BIT;		-- a3_x2_sig
+  SIGNAL no2_x1_3_sig : BIT;		-- no2_x1_3_sig
+  SIGNAL oa22_x2_sig : BIT;		-- oa22_x2_sig
+  SIGNAL no3_x1_sig : BIT;		-- no3_x1_sig
+  SIGNAL no3_x1_2_sig : BIT;		-- no3_x1_2_sig
+  SIGNAL o3_x2_sig : BIT;		-- o3_x2_sig
+  SIGNAL mbk_buf_not_vndingmchn_currstt : BIT_VECTOR(1 DOWNTO 0);	-- mbk_buf_not_vndingmchn_currstt
+
+BEGIN
+  mbk_buf_not_vndingmchn_currstt (0) <= not_vndingmchn_currstt(0);
+  mbk_buf_not_vndingmchn_currstt (1) <= not_vndingmchn_currstt(1);
+  o3_x2_sig <= ((res OR no3_x1_2_sig) OR no3_x1_sig);
+  no3_x1_2_sig <= NOT(((halfin OR not_aux1) OR onein));
+  no3_x1_sig <= NOT(((not_onein OR not_aux1) OR not_halfin));
+  oa22_x2_sig <= ((vndingmchn_currstt(3) AND no2_x1_3_sig) OR 
+a3_x2_sig);
+  no2_x1_3_sig <= NOT((onein OR not_aux2));
+  a3_x2_sig <= ((aux3 AND na2_x1_6_sig) AND on12_x1_sig);
+  on12_x1_sig <= (NOT(not_vndingmchn_currstt(4)) OR na2_x1_7_sig);
+  na2_x1_7_sig <= NOT((not_onein AND not_aux0));
+  na2_x1_6_sig <= NOT((onein AND not_vndingmchn_currstt(3)));
+  na2_x1_2_sig <= NOT((na3_x1_2_sig AND na3_x1_sig));
+  na3_x1_2_sig <= NOT(((na2_x1_5_sig AND aux3) AND na2_x1_4_sig));
+  na2_x1_5_sig <= NOT((onein AND not_vndingmchn_currstt(2)));
+  na2_x1_4_sig <= NOT((not_onein AND not_vndingmchn_currstt(3)));
+  na3_x1_sig <= NOT(((aux2 AND na2_x1_3_sig) AND na4_x1_sig));
+  na2_x1_3_sig <= NOT((not_onein AND not_vndingmchn_currstt(2)));
+  na4_x1_sig <= NOT((((mbk_buf_not_vndingmchn_currstt(1) AND 
+onein) AND mbk_buf_not_vndingmchn_currstt(0)) AND 
+not_vndingmchn_currstt(4)));
+  oa2a22_x2_sig <= ((an12_x1_sig AND vndingmchn_currstt(2)) OR (
+vndingmchn_currstt(3) AND no2_x1_2_sig));
+  an12_x1_sig <= (NOT(onein) AND aux3);
+  no2_x1_2_sig <= NOT((not_aux2 OR not_onein));
+  no2_x1_sig <= NOT((na2_x1_sig OR not_vndingmchn_currstt(2)));
+  na2_x1_sig <= NOT((onein AND aux2));
+  aux0 <= NOT((not_vndingmchn_currstt(1) AND 
+not_vndingmchn_currstt(0)));
+  aux2 <= NOT((halfin OR res));
+  aux3 <= NOT((res OR not_halfin));
+  not_halfin <= NOT(halfin);
+  not_onein <= NOT(onein);
+  not_aux2 <= NOT(aux2);
+  not_vndingmchn_currstt (0) <= NOT(vndingmchn_currstt(0));
+  not_vndingmchn_currstt (1) <= NOT(vndingmchn_currstt(1));
+  not_vndingmchn_currstt (2) <= NOT(vndingmchn_currstt(2));
+  not_vndingmchn_currstt (3) <= NOT(vndingmchn_currstt(3));
+  not_vndingmchn_currstt (4) <= NOT(vndingmchn_currstt(4));
+  not_aux0 <= NOT(aux0);
+  not_aux1 <= (not_aux0 AND not_vndingmchn_currstt(4));
+  label0 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (0) <= GUARDED no2_x1_sig;
+  END BLOCK label0;
+  label1 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (1) <= GUARDED oa2a22_x2_sig;
+  END BLOCK label1;
+  label2 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (2) <= GUARDED na2_x1_2_sig;
+  END BLOCK label2;
+  label3 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (3) <= GUARDED oa22_x2_sig;
+  END BLOCK label3;
+  label4 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    vndingmchn_currstt (4) <= GUARDED o3_x2_sig;
+  END BLOCK label4;
+
+change <= vndingmchn_currstt(0);
+
+can <= aux0;
+END;

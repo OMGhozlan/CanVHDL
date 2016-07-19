@@ -1,0 +1,148 @@
+ENTITY vndingmchnox IS
+   port (
+      onein  : in      bit;
+      halfin : in      bit;
+      res     : in      bit;
+      clk     : in      bit;
+      scanin  : in      bit;
+      test    : in      bit;
+      scanout : out     bit;
+      can     : out     bit;
+      change  : out     bit;
+      vdd     : in      bit;
+      vss     : in      bit;
+      vdde    : in      bit;
+      vsse    : in      bit
+ );
+END vndingmchnox;
+
+ARCHITECTURE dspns OF vndingmchnox IS
+
+
+SIGNAL oneSig: bit;
+SIGNAL halfSig: bit;
+SIGNAL resSig: bit;
+SIGNAL clkSig: bit;
+SIGNAL scaninSig: bit;
+SIGNAL testSig: bit;
+SIGNAL scanoutSig: bit;
+SIGNAL canSig: bit;
+SIGNAL changeSig: bit;
+SIGNAL ckoSig : bit;
+
+
+COMPONENT vndingmchno_scan
+   port (
+      clk     : in      bit;
+      res     : in      bit;
+      onein   : in      bit;
+      halfin  : in      bit;
+      can     : out     bit;
+      change  : out     bit;
+      vdd     : in      bit;
+      vss     : in      bit;
+      scanin  : in      bit;
+      test    : in      bit;
+      scanout : out     bit
+ );
+end COMPONENT;
+
+
+
+COMPONENT pvssick_sp
+  PORT (
+  cko  : out WOR_BIT BUS; -- cko
+  ck   : in BIT;	  -- ck
+  vdde : in BIT;	  -- vdde
+  vddi : in BIT;	  -- vddi
+  vsse : in BIT;	  -- vsse
+  vssi : in BIT		  -- vssi
+  );
+END COMPONENT;
+
+COMPONENT pck_sp
+  PORT (
+  pad  : in BIT;	-- pad
+  ck   : out BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+COMPONENT pvsse_sp
+  PORT (
+  ck   : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+COMPONENT pvdde_sp
+  PORT (
+  ck   : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+COMPONENT pvddi_sp
+  PORT (
+  ck   : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+
+COMPONENT pi_sp
+  PORT (
+  pad  : in BIT;	-- pad
+  t    : out BIT;	-- t
+  ck   : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+COMPONENT po_sp
+  PORT (
+  i    : in BIT;	-- i
+  pad  : out BIT;	-- pad
+  ck   : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT		-- vssi
+  );
+END COMPONENT;
+
+
+begin
+griebs    : vndingmchno_scan PORT MAP
+(ckoSig,resSig,oneSig,halfSig,canSig,changeSig,vdd,vss,scaninSig,testSig,scanoutSig); 
+oneinPad   : pi_sp 	PORT MAP (onein,oneSig,clkSig,vdde,vdd,vsse,vss);
+halfinPad   : pi_sp 	PORT MAP (halfin,halfSig,clkSig,vdde,vdd,vsse,vss);
+resPad  : pi_sp 	PORT MAP (res,resSig,clkSig,vdde,vdd,vsse,vss);
+clkPad 	 : pck_sp 	PORT MAP (clk,clkSig,vdde,vdd,vsse,vss);
+scaninPad    : pi_sp 	PORT MAP (scanin,scaninSig,clkSig,vdde,vdd,vsse,vss);
+testPad    : pi_sp 	PORT MAP (test,testSig,clkSig,vdde,vdd,vsse,vss);
+scanoutPad    : po_sp 	PORT MAP (scanoutSig,scanout,clkSig,vdde,vdd,vsse,vss);
+canPad    : po_sp 	PORT MAP (canSig,can,clkSig,vdde,vdd,vsse,vss);
+changePad    : po_sp 	PORT MAP (changeSig,change,clkSig,vdde,vdd,vsse,vss);
+vddePad 	 : pvdde_sp 	PORT MAP (clkSig,vdde,vdd,vsse,vss);
+vddiPad 	 : pvddi_sp 	PORT MAP (clkSig,vdde,vdd,vsse,vss);
+vssePad 	 : pvsse_sp 	PORT MAP (clkSig,vdde,vdd,vsse,vss);
+vssickPad : pvssick_sp 	PORT MAP (ckoSig,clkSig,vdde,vdd,vsse,vss);
+
+
+end dspns;

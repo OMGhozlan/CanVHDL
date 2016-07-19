@@ -1,0 +1,104 @@
+N:a3_x2_sig:-1:1996 ps
+N:an12_x1_sig:-1:816 ps
+N:aux0:-1:881 ps
+N:aux2:-1:325 ps
+N:aux3:-1:444 ps
+N:can:-1:1281 ps
+N:change:-1:927 ps
+N:clk:-1:0 ps
+N:halfin:-1:0 ps
+N:mbk_buf_not_vndingmchn_currstt 0:-1:1068 ps
+N:mbk_buf_not_vndingmchn_currstt 1:-1:1061 ps
+N:na2_x1_2_sig:-1:1899 ps
+N:na2_x1_3_sig:-1:910 ps
+N:na2_x1_4_sig:-1:892 ps
+N:na2_x1_5_sig:-1:910 ps
+N:na2_x1_6_sig:-1:889 ps
+N:na2_x1_7_sig:-1:1240 ps
+N:na2_x1_sig:-1:537 ps
+N:na3_x1_2_sig:-1:1194 ps
+N:na3_x1_sig:-1:1700 ps
+N:na4_x1_sig:-1:1428 ps
+N:no2_x1_2_sig:-1:727 ps
+N:no2_x1_3_sig:-1:694 ps
+N:no2_x1_sig:-1:905 ps
+N:no3_x1_2_sig:-1:1674 ps
+N:no3_x1_sig:-1:1669 ps
+N:not_aux0:-1:1037 ps
+N:not_aux1:-1:1403 ps
+N:not_aux2:-1:490 ps
+N:not_halfin:-1:164 ps
+N:not_onein:-1:231 ps
+N:not_vndingmchn_currstt 0:-1:649 ps
+N:not_vndingmchn_currstt 1:-1:644 ps
+N:not_vndingmchn_currstt 2:-1:701 ps
+N:not_vndingmchn_currstt 3:-1:684 ps
+N:not_vndingmchn_currstt 4:-1:692 ps
+N:o3_x2_sig:-1:2143 ps
+N:oa22_x2_sig:-1:2455 ps
+N:oa2a22_x2_sig:-1:1313 ps
+N:on12_x1_sig:-1:1575 ps
+N:onein:-1:0 ps
+N:res:-1:0 ps
+N:vndingmchn_currstt 0:-1:527 ps
+N:vndingmchn_currstt 1:-1:521 ps
+N:vndingmchn_currstt 2:-1:516 ps
+N:vndingmchn_currstt 3:-1:523 ps
+N:vndingmchn_currstt 4:-1:510 ps
+B:mbk_buf_not_vndingmchn_currstt 1:-1:1061 ps
+B:mbk_buf_not_vndingmchn_currstt 0:-1:1068 ps
+B:can_ins:-1:1281 ps
+B:change_ins:-1:927 ps
+B:vndingmchn_currstt_4_ins:-1:510 ps
+B:o3_x2_ins:-1:2143 ps
+B:no3_x1_2_ins:-1:1674 ps
+B:no3_x1_ins:-1:1669 ps
+B:vndingmchn_currstt_3_ins:-1:523 ps
+B:oa22_x2_ins:32:2455 ps
+B:no2_x1_3_ins:-1:694 ps
+B:a3_x2_ins:32:1996 ps
+B:on12_x1_ins:32:1575 ps
+B:na2_x1_7_ins:32:1240 ps
+B:na2_x1_6_ins:-1:889 ps
+B:vndingmchn_currstt_2_ins:-1:516 ps
+B:na2_x1_2_ins:-1:1899 ps
+B:na3_x1_2_ins:-1:1194 ps
+B:na2_x1_5_ins:-1:910 ps
+B:na2_x1_4_ins:-1:892 ps
+B:na3_x1_ins:-1:1700 ps
+B:na2_x1_3_ins:-1:910 ps
+B:na4_x1_ins:-1:1428 ps
+B:vndingmchn_currstt_1_ins:-1:521 ps
+B:oa2a22_x2_ins:-1:1313 ps
+B:an12_x1_ins:-1:816 ps
+B:no2_x1_2_ins:-1:727 ps
+B:vndingmchn_currstt_0_ins:-1:527 ps
+B:no2_x1_ins:-1:905 ps
+B:na2_x1_ins:-1:537 ps
+B:aux0_ins:32:881 ps
+B:aux2_ins:-1:325 ps
+B:aux3_ins:-1:444 ps
+B:not_halfin_ins:-1:164 ps
+B:not_onein_ins:-1:231 ps
+B:not_vndingmchn_currstt_2_ins:-1:701 ps
+B:not_aux2_ins:-1:490 ps
+B:not_vndingmchn_currstt_3_ins:-1:684 ps
+B:not_vndingmchn_currstt_4_ins:-1:692 ps
+B:not_vndingmchn_currstt_0_ins:32:649 ps
+B:not_vndingmchn_currstt_1_ins:-1:644 ps
+B:not_aux0_ins:32:1037 ps
+B:not_aux1_ins:-1:1403 ps
+C:change:-1:927 ps
+C:can:-1:1281 ps
+C:halfin:-1:0 ps
+C:onein:-1:0 ps
+C:res:-1:0 ps
+C:clk:-1:0 ps
+P:vndingmchn_currstt 0:vndingmchn_currstt 0:not_vndingmchn_currstt_0_ins:32:1403 ps
+P:not_vndingmchn_currstt_0_ins:not_vndingmchn_currstt 0:aux0_ins:32:1403 ps
+P:aux0_ins:aux0:not_aux0_ins:32:1403 ps
+P:not_aux0_ins:not_aux0:na2_x1_7_ins:32:1403 ps
+P:na2_x1_7_ins:na2_x1_7_sig:on12_x1_ins:32:1403 ps
+P:on12_x1_ins:on12_x1_sig:a3_x2_ins:32:1403 ps
+P:a3_x2_ins:a3_x2_sig:oa22_x2_ins:32:1403 ps
+P:oa22_x2_ins:oa22_x2_sig:vndingmchn_currstt_3_ins:32:1403 ps

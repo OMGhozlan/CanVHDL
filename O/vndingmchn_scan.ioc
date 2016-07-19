@@ -1,0 +1,20 @@
+TOP    (
+          (IOPIN clk.0 );
+          (IOPIN res.0 );
+       )
+
+RIGHT    (
+          (IOPIN halfin.0 );
+          (IOPIN onein.0 );
+       )
+
+BOTTOM (
+          (IOPIN test.0 );
+          (IOPIN scanin.0 );
+          (IOPIN scanout.0 );
+       )
+
+LEFT    (
+          (IOPIN can.0 );
+          (IOPIN change.0 );
+       )
